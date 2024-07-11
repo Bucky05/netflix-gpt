@@ -4,6 +4,17 @@
 - Header 
 - login 
 - sign up
+- routing
+- Form validation
+- useRef hook
+- firebase setup 
+- deploying on production
+- create sign up in firebase
+- Implement sign in user api
+- created redux store with userSlice
+- Implemented sign out
+- Update profile
+- Fetch from TMDB movies
 
 # Features
 - Login/Sign Up
@@ -20,3 +31,4 @@
 - NetflixGPT 
     - Search Bar
     - Movie Suggestions
+
