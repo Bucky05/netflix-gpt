@@ -3,9 +3,9 @@ import { useState ,useRef } from "react";
 import dataValidation from '../utils/validate'
 import  { createUserWithEmailAndPassword , signInWithEmailAndPassword , updateProfile} from "firebase/auth";
 import auth from '../utils/firebase'
-import { useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { addUser } from "../utils/userSlice";
+import { profile_icon } from "../utils/constants";
 
 const Login = () => {
 
@@ -15,7 +15,6 @@ const Login = () => {
     const name = useRef(null)
     const email = useRef(null)
     const password = useRef(null)
-    const navigate = useNavigate()
     const toggleSignIn = () => {
         setIsSignInForm(!isSignInForm)
     }
@@ -34,13 +33,13 @@ const Login = () => {
                 
                 const user = userCredential.user;
                 updateProfile(user, {
-                    displayName: name.current.value, photoURL: "https://media-del2-1.cdn.whatsapp.net/v/t61.24694-24/226368040_823005152007625_2181038512133255796_n.jpg?ccb=11-4&oh=01_Q5AaIJ2f0muy_NXxLO1AG8-8_pbveo7KIsR0eOhD3AEj0RKw&oe=669D12D5&_nc_sid=e6ed6c&_nc_cat=111"
+                    displayName: name.current.value, photoURL: profile_icon
                   }).then(() => {
                     // Profile updated!
                     // ...  
                     const {uid,email, displayName , photoURL} = auth.currentUser;
                     dispatch(addUser({uid:uid,email:email,displayName:displayName,photoURL : photoURL}));
-                    navigate('/browse')
+          
                     console.log(user)
                   }).catch((error) => {
                     // An error occurred
@@ -54,7 +53,6 @@ const Login = () => {
                 const errorCode = error.code;
                 const errorMessage = error.message;
                 setErrorMessage(errorCode+"-"+errorMessage)
-                navigate('/')
                 // ..
               });
         }
@@ -63,7 +61,6 @@ const Login = () => {
             signInWithEmailAndPassword(auth, email.current.value, password.current.value)
             .then((userCredential) => {
                 // Signed in 
-                navigate('/browse')
                 const user = userCredential.user;
                 console.log(user)
                 // ...
