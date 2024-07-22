@@ -27,6 +27,11 @@
 - Fetch data for trailer
 - update store with trailer video data
 - embedded the youtube video and make it autoplay and mute
+- built secondary component
+- movie list
+- movie card
+- TMDB image cdn url
+- usePopular movies custom hook
 
 inside jsx use camel casing
 

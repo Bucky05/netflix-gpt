@@ -11,3 +11,5 @@ export const API_Options =  {
 export const API_URL = 'https://api.themoviedb.org/3/movie';
 
 export const API_Key = '3211fda5e91f8e031b2c3e7424868f8f'
+
+export const IMG_CDN = 'https://image.tmdb.org/t/p/w500'
