@@ -32,6 +32,9 @@
 - movie card
 - TMDB image cdn url
 - usePopular movies custom hook
+- Gpt search page
+- Gpt search bar
+- multi language feature in gpt search 
 
 inside jsx use camel casing
 
