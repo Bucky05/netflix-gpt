@@ -40,7 +40,7 @@ const Login = () => {
                     const {uid,email, displayName , photoURL} = auth.currentUser;
                     dispatch(addUser({uid:uid,email:email,displayName:displayName,photoURL : photoURL}));
           
-                    console.log(user)
+                    
                   }).catch((error) => {
                     // An error occurred
                     // ...
@@ -60,9 +60,7 @@ const Login = () => {
             // sign in logic
             signInWithEmailAndPassword(auth, email.current.value, password.current.value)
             .then((userCredential) => {
-                // Signed in 
-                const user = userCredential.user;
-                console.log(user)
+             
                 // ...
                 })
             .catch((error) => {
