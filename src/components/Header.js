@@ -57,9 +57,9 @@ const Header = () => {
     dispatch(changeLanguage(e.target.value))
   }
   return (
-    <div className='absolute px-8 py-4 bg-gradient-to-b from-black z-10 w-full flex flex-col md:flex-row justify-between'>
-      <img
-       className="w-44 mx-auto md:mx-0"src={logo} alt='logo'/>
+    <div className='fixed px-8 py-4 bg-black z-50 w-full flex flex-col md:flex-row justify-between'>
+      <img 
+       className="w-44 mx-auto md:mx-0 z-100 bg-black"src={logo} alt='logo'/>
     {user  &&(
        <div className='justify-between flex p-2'>
         {showGptSearch && 
@@ -72,7 +72,7 @@ const Header = () => {
         <img className="hidden md:block w-12 h-12 "src={user?.photoURL} 
           alt='profile image'
           />
-          <button className='font-bold' onClick={handleSignOut}>Sign Out</button>
+          <button className='font-bold text-white' onClick={handleSignOut}>Sign Out</button>
        </div>
     )}
     </div>

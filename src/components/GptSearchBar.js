@@ -13,7 +13,7 @@ const GptSearchBar = () => {
 const handleGptSearchClick = async () => {
   //Make api call to GPT get movie results
   try {
-    const prompt = "you are a movie recommendation tool suggest upto 5  movies only titles  for query : "+searchText.current.value +" give comma separated like the example result given ahead. Example Result: movei1, movie2 , movie3. IF you dont understand what movies to give reply 'Hmm.. can you describe more about what you want to watch', just once"
+    const prompt = "you are a movie recommendation tool suggest upto 25  movies  titles  for query : "+searchText.current.value +" give comma separated like the example result given ahead. Example Result: movei1, movie2 , movie3. IF you dont understand what movies to give reply 'Hmm.. can you describe more about what you want to watch', just once"
     const genAIResult = await model.generateContent(prompt);
     const response = await genAIResult.response
     const suggestedMovies = await response.text().split(",")
@@ -21,7 +21,8 @@ const handleGptSearchClick = async () => {
     const promiseArray = suggestedMovies.map((movie) => searchMovieTMDB(movie))
     // promise array is returned
 
-    const tmdbResult = await Promise.all(promiseArray)
+    let tmdbResult = await Promise.all(promiseArray)
+
     dispatch(addGptMovieResult({movieNames: suggestedMovies , movieResults : tmdbResult}))
 }catch(err) {
   console.log(err)
@@ -46,7 +47,7 @@ const selectedLang = useSelector(store => store.config.lang)
       <form className='w-full md:w-1/2 grid grid-cols-12 bg-black' onSubmit={((e) => e.preventDefault())}>
         <input ref = {searchText} input type="text" className='p-4 m-4 col-span-9' placeholder={lang[selectedLang].gptSearchBarText}/>
         <button className='py-2 px-4 m-4 bg-red-700 text-white rounded-lg col-span-3' onClick={handleGptSearchClick}> {lang[selectedLang].search} </button>
-      </form>i
+      </form>
     </div>
   )
 }
