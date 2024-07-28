@@ -5,7 +5,6 @@ import { addTrailerVideo } from "../utils/movieSlice"
 import { useEffect } from "react"
 const useMovieTrailer = (movieId) => {
     const dispatch = useDispatch()
-    const trailerVideo  = useSelector(store => store.movies.trailerVideo)
     const getMovieVideos = async () => {
       
         const data = await fetch(API_URL+"/"+movieId+"/videos",API_Options)
@@ -16,8 +15,8 @@ const useMovieTrailer = (movieId) => {
     }
     
     useEffect(() => {
-        !trailerVideo && getMovieVideos()
-    },[])
+        getMovieVideos()
+    },[movieId])
 }
 
 export default useMovieTrailer

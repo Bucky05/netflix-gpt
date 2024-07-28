@@ -1,6 +1,7 @@
 import React from 'react';
 import MovieCard from './MovieCard';
 import { useRef, useState,useEffect } from 'react';
+import { Link } from 'react-router-dom';
 
 
 const MovieList = ({title, movies}) => {
@@ -57,7 +58,7 @@ const MovieList = ({title, movies}) => {
         <div className='flex overflow-x-scroll' ref={scrollableRef}onMouseDown={handleMouseDown} onMouseMove={handleMouseMove} onMouseUp={handleMouseUp}>
            
             <div className='flex'>
-                {movies?.length > 0 && movies.map((movie) => (<MovieCard posterPath={ movie.poster_path} /> ))}
+                {movies?.length > 0 && movies.map((movie) => (<Link to={`movie/${movie.id}`} ><MovieCard posterPath={ movie.poster_path} /> </Link>))}
                  
             </div>
         </div>
