@@ -2,8 +2,9 @@
 import { useDispatch, useSelector } from "react-redux"
 import { API_URL , API_Options } from "../utils/constants"
 import { addTrailerVideo } from "../utils/movieSlice"
-import { useEffect } from "react"
+import { useEffect, useState } from "react"
 const useMovieTrailer = (movieId) => {
+    const [loading,setLoading] = useState(true)
     const dispatch = useDispatch()
     const getMovieVideos = async () => {
       
@@ -12,11 +13,14 @@ const useMovieTrailer = (movieId) => {
         let trailer = json.results.filter(video => video.type === 'Trailer')
         trailer = trailer.length ? trailer[0] : json.results[0]
         dispatch(addTrailerVideo(trailer))
+        setLoading(false)
+        return loading
     }
     
     useEffect(() => {
         getMovieVideos()
     },[movieId])
+    return loading
 }
 
 export default useMovieTrailer

@@ -4,7 +4,7 @@ import { useSelector , useDispatch } from 'react-redux'
 import { useRef } from 'react'
 import { API_Options } from '../utils/constants'
 import model from '../utils/openai'
-import { addGptMovieResult } from '../utils/gptSlice'
+import { addGptMovieResult, toggleShimmerView } from '../utils/gptSlice'
 
 
 const GptSearchBar = () => {
@@ -13,6 +13,7 @@ const GptSearchBar = () => {
 const handleGptSearchClick = async () => {
   //Make api call to GPT get movie results
   try {
+    dispatch(toggleShimmerView(true))
     const prompt = "you are a movie recommendation tool suggest upto 25  movies  titles  for query : "+searchText.current.value +" give comma separated like the example result given ahead. Example Result: movei1, movie2 , movie3. IF you dont understand what movies to give reply 'Hmm.. can you describe more about what you want to watch', just once"
     const genAIResult = await model.generateContent(prompt);
     const response = await genAIResult.response
@@ -24,6 +25,7 @@ const handleGptSearchClick = async () => {
     let tmdbResult = await Promise.all(promiseArray)
 
     dispatch(addGptMovieResult({movieNames: suggestedMovies , movieResults : tmdbResult}))
+    dispatch(toggleShimmerView(false))
 }catch(err) {
   console.log(err)
 }

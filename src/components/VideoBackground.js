@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react'
+import React, { useEffect, useState } from 'react'
 import '../hooks/useMovieTrailer'
 import { useParams } from 'react-router-dom'
 import useMovieTrailer from '../hooks/useMovieTrailer'
@@ -8,15 +8,18 @@ const VideoBackground = ({movieId}) => {
 
 const param = useParams()
 if(param.movieId){ movieId = param.movieId }
- useMovieTrailer(movieId)
+ const loading = useMovieTrailer(movieId)
  let trailer = useSelector((store) => store.movies?.trailerVideo)
- useEffect(() => {
-  // Optionally, you can add additional logic here
-}, [trailer]);
 
-if (!trailer) {
-  return <div>Loading...</div>; // Handle loading state if needed
-}
+
+ if (loading) {
+  return <div className='w-full h-screen bg-black flex justify-center items-center'>
+      <div className='flex items-center'>
+        <div className='border-4 border-black border-t-red-600 rounded-3xl w-10 h-10 animate-spin '></div>
+        <p className='text-white ml-2'>Loading...</p>
+      </div>
+    </div>; 
+ }
 
   return (
     

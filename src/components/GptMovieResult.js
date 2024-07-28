@@ -5,7 +5,6 @@ import { Link } from "react-router-dom"
 
 const GptMovieResult = ( {movies}) => {
 
-     
   return (
     <div className='px-2 w-full'>
         <h1 className='text-lg md:text-3xl py-4 text-white'>Here is what we have found matching your description</h1>
