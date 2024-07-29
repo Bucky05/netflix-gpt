@@ -12,11 +12,11 @@ const Body = () => {
         element:<Login/>
     },
     {
-        path:'/browse',
+        path:'browse',
         element:<Browse/>
     },
     {
-      path:'/browse/movie/:movieId',
+      path:'browse/movie/:movieId',
       element:<VideoBackground/>
     }
   ]);

@@ -7,7 +7,7 @@ import { useSelector } from 'react-redux';
 import { useEffect } from 'react';
 import { addUser, removeUser } from '../utils/userSlice';
 import {logo , profile_icon} from '../utils/constants'
-import { toggleGptSearchView } from '../utils/gptSlice';
+import { toggleGptSearchView , setHomeView } from '../utils/gptSlice';
 import { Supported_Languages } from '../utils/constants';
 import { changeLanguage } from '../utils/configSlice';
 
@@ -55,10 +55,13 @@ const Header = () => {
   const handleLanguageChange = (e) => {
     dispatch(changeLanguage(e.target.value))
   }
+  const handleLogoClick = () => {
+    dispatch(setHomeView())
+  }
   return (
-    <div className='fixed px-8 py-4 bg-black z-50 w-full flex flex-col md:flex-row justify-between'>
+    <div className='fixed px-8 py-4 bg-black z-50 w-full flex flex-col md:flex-row justify-between' >
       <img 
-       className="w-44 mx-auto md:mx-0 z-100 bg-black"src={logo} alt='logo'/>
+       className="w-44 mx-auto md:mx-0 z-100 bg-black"src={logo} alt='logo' onClick={handleLogoClick}/>
     {user  &&(
        <div className='justify-between flex p-2'>
         {showGptSearch && 
@@ -67,7 +70,7 @@ const Header = () => {
          
         </select>
 }
-        <button className='py-2 px-4 m-2 bg-purple-800 text-white rounded-lg' onClick={handleGptSearchClick}>{showGptSearch ? "Home Page":"GPT Search"}</button>
+        <button className='py-2 px-4 m-2 bg-purple-800 text-white rounded-lg' onClick={handleGptSearchClick}>{showGptSearch ? "Home Page":"Gemini Search"}</button>
         <img className="hidden md:block w-12 h-12 "src={user?.photoURL} 
           alt='profile image'
           />

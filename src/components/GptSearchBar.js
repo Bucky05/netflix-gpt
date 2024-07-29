@@ -16,9 +16,14 @@ const handleGptSearchClick = async () => {
     dispatch(toggleShimmerView(true))
     const prompt = "you are a movie recommendation tool suggest upto 25  movies  titles  for query : "+searchText.current.value +" give comma separated like the example result given ahead. Example Result: movei1, movie2 , movie3. IF you dont understand what movies to give reply 'Hmm.. can you describe more about what you want to watch', just once"
     const genAIResult = await model.generateContent(prompt);
-    const response = await genAIResult.response
-    const suggestedMovies = await response.text().split(",")
+    let response = await genAIResult.response
+    response = await response.text()
     
+    if(response.includes('Hmm.. can you describe more about what you want to watch')) {
+      dispatch(toggleShimmerView(false))
+      dispatch(addGptMovieResult({movieNames: 'Hmm.. can you describe more about what you want to watch' , movieResults : []}))
+    }  else {
+    const  suggestedMovies = await response.split(",")
     const promiseArray = suggestedMovies.map((movie) => searchMovieTMDB(movie))
     // promise array is returned
 
@@ -26,7 +31,9 @@ const handleGptSearchClick = async () => {
 
     dispatch(addGptMovieResult({movieNames: suggestedMovies , movieResults : tmdbResult}))
     dispatch(toggleShimmerView(false))
+    }
 }catch(err) {
+  dispatch(toggleShimmerView(false))
   console.log(err)
 }
 
