@@ -1,4 +1,3 @@
-import React, { useEffect } from 'react'
 import Login from './Login'
 import Browse from './Browse'
 import { createBrowserRouter,RouterProvider } from 'react-router-dom'
@@ -12,11 +11,11 @@ const Body = () => {
         element:<Login/>
     },
     {
-        path:'browse',
+        path:'/browse',
         element:<Browse/>
     },
     {
-      path:'browse/movie/:movieId',
+      path:'/browse/movie/:movieId',
       element:<VideoBackground/>
     }
   ]);
